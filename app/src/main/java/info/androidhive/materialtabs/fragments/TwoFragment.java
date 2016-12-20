@@ -34,6 +34,7 @@ public class TwoFragment extends Fragment{
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     private String articleJSON;
 
+
     public TwoFragment() {
         // Required empty public constructor
     }
@@ -46,6 +47,23 @@ public class TwoFragment extends Fragment{
 
 
     }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        // Make sure that we are currently visible
+        if (this.isVisible()) {
+
+        }
+            if (!isVisibleToUser) {
+                System.out.println("MyFragment out of 2");
+                // TODO stop audio playback
+            }
+        }
+
+
 
     @Override
     public void onResume() {
@@ -92,7 +110,7 @@ public void print(){
         articleJSON = preferences.getString("savedArticles", null);
         Type listType = new TypeToken<ArrayList<SavedArticle>>(){}.getType();
         ArrayList<SavedArticle> articleList = new Gson().fromJson(articleJSON, listType);
-                
+
             // Set our custom array adapter as the ListView's adapter.
             listAdapter = new articleArrayAdapter(getActivity(), articleList);
             mainListView.setAdapter(listAdapter);
